@@ -12,6 +12,7 @@ int color;
 
 using namespace std;
 static int varX, varY = 10;
+static int randNum = rand() % (1 - 4 + 1) + 1;
 void cambiar_color()
 {
     switch (color)
@@ -47,7 +48,7 @@ void comparar_seleccion(string comando, int num) {
     res = toupper(comando.compare("MOVR"));
     if (res == 0) {
         int var;
-
+        
         _asm
         {
             xor eax, eax
@@ -56,7 +57,7 @@ void comparar_seleccion(string comando, int num) {
             xor edx, edx
 
             mov eax, varX
-            mov ebx, num
+            mov ebx, randNum
 
             add ecx, eax
             add ecx, ebx
@@ -91,16 +92,16 @@ void comparar_seleccion(string comando, int num) {
 
 
                 nextt :
-            cmp num, 3
+            cmp randNum, 1
                 jb azul
 
-                cmp num, 6
+                cmp randNum, 2
                 jb rojo
 
-                cmp num, 9
+                cmp randNum, 3
                 jb amarillo
 
-                cmp num, 10
+                cmp randNum, 4
                 jae verde
 
                 azul :
@@ -158,7 +159,7 @@ void comparar_seleccion(string comando, int num) {
             xor edx, edx
 
             mov eax, varY
-            mov ebx, num
+            mov ebx, randNum
 
             add ecx, eax
             add ecx, ebx
@@ -192,16 +193,16 @@ void comparar_seleccion(string comando, int num) {
                 jmp nextt2
                 
                 nextt2 :
-                cmp num, 3
+                cmp randNum, 1
                 jb azul2
 
-                cmp num, 6
+                cmp randNum, 2
                 jb rojo2
 
-                cmp num, 9
+                cmp randNum, 3
                 jb amarillo2
 
-                cmp num, 10
+                cmp randNum, 4
                 jae verde2
 
                 azul2 :
@@ -254,7 +255,7 @@ void comparar_seleccion(string comando, int num) {
             xor edx, edx
 
             mov eax, varX
-            mov ebx, num
+            mov ebx, randNum
 
             add ecx, eax
             add ecx, ebx
@@ -288,16 +289,16 @@ void comparar_seleccion(string comando, int num) {
                 jmp nextt3
 
                 nextt3:
-                cmp num, 3
+                cmp randNum, 1
                 jb azul3
 
-                cmp num, 6
+                cmp randNum, 2
                 jb rojo3
 
-                cmp num, 9
+                cmp randNum, 2
                 jb amarillo3
 
-                cmp num, 10
+                cmp randNum, 4
                 jae verde3
 
                 azul3 :
@@ -321,7 +322,7 @@ void comparar_seleccion(string comando, int num) {
 
         cambiar_color();
 
-        if (verificador > 0) {
+        if (verificador < 1) {
             gotoxy(0, 8);
             cout << "Numero fuera de rango" << endl;
             system("pause");
@@ -353,7 +354,7 @@ void comparar_seleccion(string comando, int num) {
             xor edx, edx
 
             mov eax, varY
-            mov ebx, num
+            mov ebx, randNum
 
             add ecx, eax
             add ecx, ebx
@@ -473,6 +474,7 @@ void Menu() {
     cout << "Movd" << endl;
     cout << "q Para salir" << endl;
     cout << "Utilice la siguiente estructura <comando>, <num>." << endl;
+
 }
 
 int main() {
@@ -481,6 +483,8 @@ int main() {
     string beffa;
     bool res;
     int resu = 1;
+    gotoxy(40, 0);
+    cout << "Lim [0,120,28,0]" << endl;
     do {
         coordenadas(varX, varY);
         gotoxy(0, 9);
